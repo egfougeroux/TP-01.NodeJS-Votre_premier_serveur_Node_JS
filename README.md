@@ -10,7 +10,7 @@
 ### Questions & Réponses
 ---
 
-**1. **Quelle commande vous permet d'afficher les ports utilisés sur votre machine (serveur) ?**
+**1. Quelle commande vous permet d'afficher les ports utilisés sur votre machine (serveur) ?**
 
 `ss -tuln` (ou alternativement netstat `-tuln`).
 

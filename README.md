@@ -52,9 +52,9 @@ Le code `200` est le code de statut HTTP standard **OK**. Il indique au client q
 
 **7. Ouvrez le panneau de développeur sur votre navigateur (F12) > onglet Network > rechargez la page. Que voyez-vous ?**
 
-    - Une requête HTTP de méthode GET vers l'URL du serveur avec un statut `200 OK`. 
-    - Dans les en-têtes de réponse (Response Headers), on retrouve `Content-Type: text/plain`. 
-    - Souvent, une seconde requête apparaît automatiquement pour demander l'icône de favori (`/favicon.ico`).
+- Une requête HTTP de méthode GET vers l'URL du serveur avec un statut `200 OK`. 
+- Dans les en-têtes de réponse (Response Headers), on retrouve `Content-Type: text/plain`. 
+- Souvent, une seconde requête apparaît automatiquement pour demander l'icône de favori (`/favicon.ico`).
 
 ---
 
@@ -77,11 +77,11 @@ Dans le terminal, le log affiche toujours `Page: /`. En effet, `url.parse(req.ur
 
 **3. Connaissez-vous d'autres méthodes d'affichage dans la console que `console.log()` ?**
 
-    - `console.error()` : affiche un message d'erreur (souvent en rouge / canal stderr).
-    - `console.warn()` : affiche un avertissement (souvent en jaune).
-    - `console.info()` : affiche une information informative.
-    - `console.table()` : affiche des données complexes (tableaux ou objets) sous forme d'un tableau lisible.
-    - `console.clear()` : efface la console.
+- `console.error()` : affiche un message d'erreur (souvent en rouge / canal stderr).
+- `console.warn()` : affiche un avertissement (souvent en jaune).
+- `console.info()` : affiche une information informative.
+- `console.table()` : affiche des données complexes (tableaux ou objets) sous forme d'un tableau lisible.
+- `console.clear()` : efface la console.
 
 ---
 
@@ -98,11 +98,11 @@ Le serveur extrait la valeur du paramètre via `params.name` et la page affiche 
 
 **2. Modifiez le programme pour prendre en compte un paramètre `age`, puis affichez le message `"Bonjour [name], vous avez [age] ans !"`**
 
-    - **Test dans le navigateur :**
+- **Test dans le navigateur :** <br>
     En appelant l'URL :
     `http://localhost:8085/?name=Alex&age=20` (ou avec l'IP de la VM)
     
-    - **Résultat obtenu :**
+- **Résultat obtenu :** <br>
     Le navigateur affiche : `Bonjour Alex, vous avez 20 ans !`.
 
 

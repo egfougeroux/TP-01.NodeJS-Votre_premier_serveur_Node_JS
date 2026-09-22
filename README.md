@@ -105,4 +105,22 @@ Le serveur extrait la valeur du paramètre via `params.name` et la page affiche 
 - **Résultat obtenu :** <br>
     Le navigateur affiche : `Bonjour Alex, vous avez 20 ans !`.
 
+---
+
+## Bonus
+
+### Gestion des routes et erreurs 404
+
+L'application vérifie le chemin (`pathname`) demandé par le client :
+
+- **`/` (Route principale)** : renvoie un code de statut HTTP `200 OK` et salue l'utilisateur (avec prise en compte optionnelle des paramètres `name` et `age`).
+- **Toute autre route (ex. `/etape5`)** : renvoie un code d'erreur HTTP `404 Not Found` avec le message `Erreur 404 : Page introuvable !`.
+
+### Exemples d'appels
+
+| URL | Statut HTTP | Réponse |
+| --- | --- | --- |
+| `http://localhost:8085/` | 200 OK | Bonjour inconnu |
+| `http://localhost:8085/?name=Alex&age=20` | 200 OK | Bonjour Alex, vous avez 20 ans ! |
+| `http://localhost:8085/etape5` | 404 Not Found | Erreur 404 : Page introuvable ! |
 

@@ -1,29 +1,31 @@
-// Importer les modules nécessaires
 const http = require('http');
 const url = require('url');
-const querystring = require('querystring'); // 1. Ajout du module querystring
+const querystring = require('querystring');
 
-// Création du serveur
 const server = http.createServer(function(req, res) {
-    // 2. Affichage du chemin dans la console
-    const page = url.parse(req.url).pathname;
-    console.log("Page: " + page);
+    const parsedUrl = url.parse(req.url);
+    const page = parsedUrl.pathname;
+    const params = querystring.parse(parsedUrl.query);
 
-    // 3. Récupération des paramètres (query params)
-    const params = querystring.parse(url.parse(req.url).query);
+    console.log("Page demandée : " + page);
 
-    // Création des Headers de la réponse
-    res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+    // Vérification de la route
+    if (page === '/') {
+        // Page d'accueil : statut 200 OK
+        res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
 
-    // 4. Gestion des conditions pour name et age
-    if ("name" in params && "age" in params) {
-        res.end("Bonjour " + params.name + ", vous avez " + params.age + " ans !");
-    } else if ("name" in params) {
-        res.end("Bonjour " + params.name + " !");
+        if ("name" in params && "age" in params) {
+            res.end("Bonjour " + params.name + ", vous avez " + params.age + " ans !");
+        } else if ("name" in params) {
+            res.end("Bonjour " + params.name + " !");
+        } else {
+            res.end("Bonjour inconnu");
+        }
     } else {
-        res.end("Bonjour inconnu");
+        // Route inconnue (ex: /etape5) : statut 404 Not Found
+        res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end("Erreur 404 : Page introuvable !");
     }
 });
 
-// Démarrage du serveur sur le port 8085
 server.listen(8085);

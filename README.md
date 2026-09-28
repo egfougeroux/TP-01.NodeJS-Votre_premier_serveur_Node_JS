@@ -107,20 +107,54 @@ Le serveur extrait la valeur du paramètre via `params.name` et la page affiche 
 
 ---
 
-## Bonus
+## Mission 4 : Limiter l'accès à certaines URLs
 
 ### Gestion des routes et erreurs 404
 
-L'application vérifie le chemin (`pathname`) demandé par le client :
+L'application filtre les requêtes selon le chemin demandé (`pathname`) :
 
-- **`/` (Route principale)** : renvoie un code de statut HTTP `200 OK` et salue l'utilisateur (avec prise en compte optionnelle des paramètres `name` et `age`).
-- **Toute autre route (ex. `/etape5`)** : renvoie un code d'erreur HTTP `404 Not Found` avec le message `Erreur 404 : Page introuvable !`.
+- Seules les URLs autorisées renvoient le code de statut HTTP `200 OK`.
+- Toute autre URL non reconnue renvoie une erreur HTTP `404 Not Found`
 
 ### Exemples d'appels
 
-| URL | Statut HTTP | Réponse |
-| --- | --- | --- |
-| `http://localhost:8085/` | 200 OK | Bonjour inconnu |
-| `http://localhost:8085/?name=Alex&age=20` | 200 OK | Bonjour Alex, vous avez 20 ans ! |
-| `http://localhost:8085/etape5` | 404 Not Found | Erreur 404 : Page introuvable ! |
+| URL demandée | Statut HTTP retourné | Explication / Réponse |
+| :--- | :--- | :--- |
+| `http://localhost:8085/etape1` | `200 OK` | URL autorisée (affiche "Bonjour inconnu") |
+| `http://localhost:8085/etape1?name=Alex&age=20` | `200 OK` | URL autorisée avec paramètres ("Bonjour Alex, vous avez 20 ans !") |
+| `http://localhost:8085/` | `200 OK` | Racine du serveur (autorisée) |
+| `http://localhost:8085/autre` | `404 Not Found` | URL non existante ("Erreur 404 : Page introuvable !") |
 
+---
+
+## Mission 5 : Limiter l'accès en fonction d'un Header présent dans la requête
+
+### Paramètres définis
+- **Route protégée :** `/secret`
+- **Header exigé :** `x-mon-token`
+- **Valeur attendue :** `secret123`
+
+### Fonctionnement
+Le serveur extrait les en-têtes via `req.headers['x-mon-token']`.
+- Si le header correspond à la valeur demandée, le serveur renvoie un statut `200 OK`.
+- Si le header est absent ou incorrect, le serveur renvoie un statut `401 Unauthorized`.
+
+### Tests réalisés (via Postman / Insomnia)
+
+| URL appelée | En-tête (Header) fourni | Statut HTTP obtenu | Message reçu |
+| :--- | :--- | :--- | :--- |
+| `/secret` | *(aucun)* | `401 Unauthorized` | 401 Non autorisé : en-tête manquant ou invalide. |
+| `/secret` | `x-mon-token: faux` | `401 Unauthorized` | 401 Non autorisé : en-tête manquant ou invalide. |
+| `/secret` | `x-mon-token: secret123` | `200 OK` | Accès autorisé : en-tête valide ! |
+
+---
+
+## Mission 6 : Utiliser les différents types d'authentification d'API
+
+### Tableau récapitulatif des endpoints
+
+| Endpoint | Type d'authentification | Emplacement & Format attendu | Valeur de test | Statut succès | Statut échec |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `/basic-auth` | Basic Authentication | Header `Authorization: Basic <base64>` | `admin:secret` (`YWRtaW46c2VjcmV0`) | 200 OK | 401 Unauthorized |
+| `/api-key` | API Key | Header `x-api-key: <clé>` | `cle-secrete-bts-2026` | 200 OK | 403 Forbidden |
+| `/bearer-token` | Bearer Token | Header `Authorization: Bearer <token>` | `token-secret-jwt-2026` | 200 OK | 401 Unauthorized |

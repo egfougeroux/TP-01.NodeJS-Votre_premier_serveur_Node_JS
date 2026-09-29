@@ -158,4 +158,4 @@ Le serveur extrait les en-têtes via `req.headers['x-mon-token']`.
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `/basic-auth` | Basic Authentication | Header `Authorization: Basic <base64>` | `admin:secret` (`YWRtaW46c2VjcmV0`) | 200 OK | 401 Unauthorized |
 | `/api-key` | API Key | Header `x-api-key: <clé>` | `cle-secrete-bts-2026` | 200 OK | 403 Forbidden |
-| `/bearer-token` | Bearer Token | Header `Authorization: Bearer <token>` | `token-secret-jwt-2026` | 200 OK | 401 Unauthorized |
+| `/bearer-token` | Bearer Token | Header `Authorization: Bearer <token>` | `token-secret-2026` | 200 OK | 401 Unauthorized |

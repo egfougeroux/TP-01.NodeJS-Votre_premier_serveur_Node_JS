@@ -76,7 +76,7 @@ const server = http.createServer(function(req, res) {
         if (auth && auth.startsWith('Bearer ')) {
             const token = auth.split(' ')[1];
 
-            if (token === 'token-secret-jwt-2026') {
+            if (token === 'token-secret-2026') {
                 res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
                 return res.end("Authentification Bearer Token réussie !");
             }
